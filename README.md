@@ -1,7 +1,8 @@
 ##**ECHIS Data Verification Interface**
 
-
 This is a React application for the ECHIS Data Verification Interface. It fetches data from a local server and dynamically displays it based on the number of key-value pairs each item has.
+
+
 ##**Features**
 
 1. Fetches data from http://localhost:3000/api/medic and groups it based on the number of key-value pairs.
@@ -10,13 +11,17 @@ This is a React application for the ECHIS Data Verification Interface. It fetche
 4. Supports dynamic rendering of JSON objects within the table cells.
 
 
-##**Installation**
+**Installation**
+
+
 Clone the repository:
 git clone <Hackathon-Couch-DB-UI-interface>
 
 
 ##**Install dependencies:**
+
 npm install
+
 ##**Start the development server:**
 npm start
 Open your browser and navigate to http://localhost:3000 to view the application.
