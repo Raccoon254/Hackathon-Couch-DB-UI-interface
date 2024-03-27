@@ -1,16 +1,20 @@
 import axios from "axios";
-import { useState } from "react";
+import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const path = "http://localhost:3000/auth/login";
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const usernameRef = useRef();
+  const passwordRef = useRef();
+  const navigate = useNavigate();
 
-  const login = async (e) => {
+  const login = async () => {
     console.log("Request received");
+    const username = usernameRef.current.value;
+    const password = passwordRef.current.value;
     if (username !== "" && password !== "") {
-      e.preventDefault();
       try {
+        console.log("Sending request");
         let response = await axios.post(path, {
           username: username,
           password: password,
@@ -18,12 +22,11 @@ const Login = () => {
         let data = await response.json();
         if (data.status === 200) {
           console.log("Login successful");
-          alert("Login successful");
         }
       } catch (error) {
         console.log("An error occurred");
-        alert("Login failed");
       }
+      navigate("/");
     }
   };
   return (
@@ -40,9 +43,7 @@ const Login = () => {
           id="username"
           name="username"
           className="rounded-lg p-2 mb-4"
-          onChange={(e) => {
-            setUsername(e.target.value);
-          }}
+          ref={usernameRef}
           required
         />
         <label htmlFor="password">Password:</label>
@@ -52,16 +53,12 @@ const Login = () => {
           name="password"
           className="rounded-lg p-2 mb-12"
           required
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
+          ref={passwordRef}
         />
         <button
-          type="submit"
+          type="button"
           className="btn btn-success text-2xl p-2"
-          onSubmit={(e) => {
-            login(e);
-          }}
+          onClick={login}
         >
           Login
         </button>
